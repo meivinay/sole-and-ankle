@@ -45,26 +45,48 @@ const ShoeCard = ({
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
         </Row>
+        {
+          variant !== 'default' ? (
+          <Variant accent={typeof salePrice === 'number' ? COLORS.primary : COLORS.secondary}>
+            {variant === 'on-sale' ? 'Sale' : 'Just Released' }
+          </Variant>
+          ) : null
+        }
       </Wrapper>
     </Link>
   );
 };
+
+const Variant = styled.div`
+padding: 7px 9px 9px 10px;
+font-size: 14px;
+font-weight: 700;
+line-height: 16.44px;
+position: absolute;
+top: 12px;
+text-transform: capitalize;
+right: -14px;
+background-color: ${props => props.accent};
+color: ${COLORS.white}
+`
 
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article` position: relative;`;
 
 const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`height: 312px; width: 340px; border-radius: 16px 16px 4px 4px;`;
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Name = styled.h3`
