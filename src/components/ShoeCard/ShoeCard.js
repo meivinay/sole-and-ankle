@@ -40,7 +40,8 @@ const ShoeCard = ({
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price isSale={salePrice}>{formatPrice(price)}</Price>
+          <SalePrice>{salePrice}</SalePrice>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
@@ -48,7 +49,7 @@ const ShoeCard = ({
         {
           variant !== 'default' ? (
           <Variant accent={typeof salePrice === 'number' ? COLORS.primary : COLORS.secondary}>
-            {variant === 'on-sale' ? 'Sale' : 'Just Released' }
+            {variant === 'on-sale' ? 'Sale' : 'Just Released!' }
           </Variant>
           ) : null
         }
@@ -65,9 +66,10 @@ line-height: 16.44px;
 position: absolute;
 top: 12px;
 text-transform: capitalize;
-right: -14px;
+right: -4px;
 background-color: ${props => props.accent};
-color: ${COLORS.white}
+color: ${COLORS.white};
+border-radius: 2px;
 `
 
 const Link = styled.a`
@@ -94,7 +96,9 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  text-decoration: ${props => props.isSale ? 'line-through' : 'revert'}
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
@@ -103,6 +107,9 @@ const ColorInfo = styled.p`
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.primary};
+  position: absolute;
+  right: 0px;
+  bottom: 6px;
 `;
 
 export default ShoeCard;
